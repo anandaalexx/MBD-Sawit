@@ -50,4 +50,10 @@ const lihatPetaniByID = (id) => {
   });
 };
 
-module.exports = { tambahPetani, updatePetani, deletePetani, lihatPetani };
+module.exports = {
+  tambahPetani,
+  updatePetani,
+  deletePetani,
+  lihatPetani,
+  lihatPetaniByID,
+};

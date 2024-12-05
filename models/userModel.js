@@ -1,10 +1,10 @@
 const pool = require("../config/db");
 
-const registerUser = (username, password, role) => {
+const registerUser = (username, nama, password, role) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const query = "CALL RegisterUser(?, ?, ?)";
-      pool.query(query, [username, password, role], (err, results) => {
+      const query = "CALL RegisterUser(?, ?, ?, ?)";
+      pool.query(query, [username, nama, password, role], (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });

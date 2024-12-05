@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieparser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoutes");
 const petaniRoutes = require("./routes/petaniRoutes");
@@ -9,6 +10,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cookieparser());
 
 app.use("/users", userRoutes);
 app.use("/petani", petaniRoutes);
