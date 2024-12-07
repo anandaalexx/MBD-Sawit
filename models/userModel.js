@@ -24,6 +24,26 @@ const loginUser = (username, password) => {
   });
 };
 
+const updateUser = (id, username, nama) => {
+  return new Promise((resolve, reject) => {
+    const query = "CALL UpdateUsers(?, ?, ?)";
+    pool.query(query, [id, username, nama], (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
+    });
+  });
+};
+
+const hapusOperator = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "CALL HapusOperator(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) return reject(err);
+      resolve(results);
+    });
+  });
+};
+
 const getUsers = () => {
   return new Promise((resolve, reject) => {
     const query = "CALL LihatUsers()";
@@ -37,5 +57,7 @@ const getUsers = () => {
 module.exports = {
   registerUser,
   loginUser,
+  updateUser,
+  hapusOperator,
   getUsers,
 };

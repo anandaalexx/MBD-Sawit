@@ -36,6 +36,26 @@ const loginUser = async (req, res) => {
   }
 };
 
+const updateUsers = async (req, res) => {
+  const { id, username, nama } = req.body;
+  try {
+    const user = await userModel.updateUser(id, username, nama);
+    res.status(201).json({ message: "User berhasil diupdate" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const hapusOperator = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await userModel.deleteUser(id);
+    res.status(200).json({ message: "User berhasil dihapus" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 const getUsers = async (req, res) => {
   try {
     const users = await userModel.getUsers();
@@ -54,5 +74,6 @@ module.exports = {
   registerUser,
   loginUser,
   logoutUser,
+  updateUsers,
   getUsers,
 };
