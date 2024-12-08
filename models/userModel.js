@@ -34,9 +34,9 @@ const updateUser = (id, username, nama) => {
   });
 };
 
-const hapusOperator = (id) => {
+const deleteUser = (id) => {
   return new Promise((resolve, reject) => {
-    const query = "CALL HapusOperator(?)";
+    const query = "CALL DeleteUsers(?)";
     pool.query(query, [id], (err, results) => {
       if (err) return reject(err);
       resolve(results);
@@ -78,7 +78,7 @@ module.exports = {
   registerUser,
   loginUser,
   updateUser,
-  hapusOperator,
+  deleteUser,
   getUsers,
   getUsersByID,
   getUsersByUsername,

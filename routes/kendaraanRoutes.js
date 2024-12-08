@@ -9,7 +9,7 @@ router.post(
   kendaraanController.tambahKendaraan
 );
 
-router.put(
+router.patch(
   "/update/:id",
   authToken(["operator"]),
   kendaraanController.updateKendaraan

@@ -10,7 +10,7 @@ router.post(
   penimbanganController.catatPenimbangan
 );
 
-router.put(
+router.patch(
   "/update/:id",
   auth.authToken(["operator"]),
   penimbanganController.updatePenimbangan

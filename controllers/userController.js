@@ -46,7 +46,7 @@ const updateUsers = async (req, res) => {
   }
 };
 
-const hapusOperator = async (req, res) => {
+const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
     const user = await userModel.deleteUser(id);
@@ -95,7 +95,7 @@ module.exports = {
   loginUser,
   logoutUser,
   updateUsers,
-  hapusOperator,
+  deleteUser,
   getUsers,
   getUsersByID,
   getUsersByUsername,

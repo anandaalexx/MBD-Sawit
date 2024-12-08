@@ -11,7 +11,6 @@ const authToken = (roles = []) => {
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      console.log("Decoded JWT:", decoded);
       if (err) {
         return res.status(401).json({ message: "Token tidak valid!" });
       }

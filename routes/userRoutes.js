@@ -6,7 +6,8 @@ const { authToken } = require("../middleware/authToken");
 router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
 router.post("/logout", userController.logoutUser);
-router.delete("/hapus", authToken(["manajer"]), userController.hapusOperator);
+router.patch("/update", authToken(["manajer"]), userController.updateUsers);
+router.delete("/hapus/:id", authToken(["manajer"]), userController.deleteUser);
 router.get("/lihat", authToken(["manajer"]), userController.getUsers);
 router.get("/lihat/:id", authToken(["manajer"]), userController.getUsersByID);
 router.get(
