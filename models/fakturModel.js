@@ -50,21 +50,10 @@ const getFakturByNoFaktur = (no_faktur) => {
   });
 };
 
-const getLaporan = (start_date, end_date) => {
-  return new Promise((resolve, reject) => {
-    const query = "CALL GetLaporanRingkasanPenimbangan(?, ?)";
-    pool.query(query, [start_date, end_date], (err, results) => {
-      if (err) reject(err);
-      resolve(results);
-    });
-  });
-};
-
 module.exports = {
   buatFaktur,
   updateStatusFaktur,
   getFaktur,
   getFakturByID,
   getFakturByNoFaktur,
-  getLaporan,
 };

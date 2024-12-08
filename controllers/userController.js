@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 3600000,
+      maxAge: 3600000 * 3,
       sameSite: "Strict",
     });
 
@@ -49,7 +49,7 @@ const updateUsers = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await userModel.deleteUser(id);
+    await userModel.deleteUser(id);
     res.status(200).json({ message: "User berhasil dihapus" });
   } catch (err) {
     res.status(500).json({ message: err.message });

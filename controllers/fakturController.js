@@ -49,16 +49,6 @@ const getFakturByNoFaktur = async (req, res) => {
   }
 };
 
-const getLaporan = async (req, res) => {
-  const { start_date, end_date } = req.body;
-  try {
-    const laporan = await fakturModel.getFakturByNoFaktur(start_date, end_date);
-    res.status(200).json(laporan);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
 module.exports = {
   buatFaktur,
   updateStatusFaktur,

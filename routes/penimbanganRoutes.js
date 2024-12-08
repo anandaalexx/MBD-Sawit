@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const authToken = require("../middleware/authToken");
 const penimbanganController = require("../controllers/penimbanganController");
 const auth = require("../middleware/authToken");
 
@@ -23,5 +22,7 @@ router.get(
   auth.authToken(),
   penimbanganController.getPenimbanganByID
 );
+
+router.get("/laporan", auth.authToken(), penimbanganController.getLaporan);
 
 module.exports = router;
