@@ -40,9 +40,31 @@ const lihatKendaraan = () => {
   });
 };
 
+const getKendaraanByID = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "CALL CariKendaraanById(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) reject(err);
+      resolve(results[0]);
+    });
+  });
+};
+
+const getKendaraanByPlat = (no_plat) => {
+  return new Promise((resolve, reject) => {
+    const query = "CALL CariKendaraanByNoPlat(?)";
+    pool.query(query, [no_plat], (err, results) => {
+      if (err) reject(err);
+      resolve(results[0]);
+    });
+  });
+};
+
 module.exports = {
   tambahKendaraan,
   updateKendaraan,
   hapusKendaraan,
   lihatKendaraan,
+  getKendaraanByID,
+  getKendaraanByPlat,
 };

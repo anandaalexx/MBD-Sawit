@@ -21,6 +21,14 @@ router.delete(
   kendaraanController.hapusKendaraan
 );
 
-router.get("/", authToken(), kendaraanController.lihatKendaraan);
+router.get("/lihat", authToken(), kendaraanController.lihatKendaraan);
+
+router.get("/lihat/:id", authToken(), kendaraanController.getKendaraanByID);
+
+router.get(
+  "/lihat/noplat",
+  authToken(),
+  kendaraanController.getKendaraanByPlat
+);
 
 module.exports = router;
