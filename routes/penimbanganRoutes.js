@@ -11,7 +11,7 @@ router.post(
 );
 
 router.put(
-  "/update",
+  "/update/:id",
   auth.authToken(["operator"]),
   penimbanganController.updatePenimbangan
 );

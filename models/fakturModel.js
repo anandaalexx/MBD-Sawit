@@ -12,7 +12,7 @@ const buatFaktur = (id_penimbangan) => {
 
 const updateStatusFaktur = (id, status) => {
   return new Promise((resolve, reject) => {
-    const query = "CALL UpdateStatusFaktur(?)";
+    const query = "CALL UpdateStatusFaktur(?, ?)";
     pool.query(query, [id, status], (err, results) => {
       if (err) reject(err);
       resolve(results);
@@ -22,10 +22,10 @@ const updateStatusFaktur = (id, status) => {
 
 const getFaktur = () => {
   return new Promise((resolve, reject) => {
-    const query = "CALL LihatFaktur(?)";
+    const query = "CALL LihatFaktur()";
     pool.query(query, (err, results) => {
       if (err) reject(err);
-      resolve(results);
+      resolve(results[0]);
     });
   });
 };
@@ -35,7 +35,7 @@ const getFakturByID = (id) => {
     const query = "CALL CariFakturById(?)";
     pool.query(query, [id], (err, results) => {
       if (err) reject(err);
-      resolve(results[0]);
+      resolve(results);
     });
   });
 };
@@ -45,7 +45,7 @@ const getFakturByNoFaktur = (no_faktur) => {
     const query = "CALL CariFakturByNomorFaktur(?)";
     pool.query(query, [no_faktur], (err, results) => {
       if (err) reject(err);
-      resolve(results[0]);
+      resolve(results);
     });
   });
 };

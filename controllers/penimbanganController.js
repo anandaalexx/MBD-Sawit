@@ -19,7 +19,7 @@ const catatPenimbangan = async (req, res) => {
 
 const updatePenimbangan = async (req, res) => {
   const { id } = req.params;
-  const { id_op } = req.user.id;
+  const id_op = req.user.id;
   const { id_kendaraan, berat_kotor, berat_kendaraan } = req.body;
   try {
     await penimbanganModel.updatePenimbangan(

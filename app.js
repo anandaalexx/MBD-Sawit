@@ -6,6 +6,7 @@ const petaniRoutes = require("./routes/petaniRoutes");
 const kendaraanRoutes = require("./routes/kendaraanRoutes");
 const penimbanganRoutes = require("./routes/penimbanganRoutes");
 const fakturRoutes = require("./routes/fakturRoutes");
+const hargaRoutes = require("./routes/hargaRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -18,6 +19,7 @@ app.use("/petani", petaniRoutes);
 app.use("/kendaraan", kendaraanRoutes);
 app.use("/penimbangan", penimbanganRoutes);
 app.use("/faktur", fakturRoutes);
+app.use("/harga", hargaRoutes);
 
 const port = 3000;
 app.listen(port, () => {

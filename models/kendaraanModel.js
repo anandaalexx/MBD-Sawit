@@ -35,7 +35,7 @@ const lihatKendaraan = () => {
     const query = "CALL LihatKendaraan()";
     pool.query(query, (err, results) => {
       if (err) reject(err);
-      resolve(results);
+      resolve(results[0]);
     });
   });
 };
@@ -45,7 +45,7 @@ const getKendaraanByID = (id) => {
     const query = "CALL CariKendaraanById(?)";
     pool.query(query, [id], (err, results) => {
       if (err) reject(err);
-      resolve(results[0]);
+      resolve(results);
     });
   });
 };
@@ -55,7 +55,7 @@ const getKendaraanByPlat = (no_plat) => {
     const query = "CALL CariKendaraanByNoPlat(?)";
     pool.query(query, [no_plat], (err, results) => {
       if (err) reject(err);
-      resolve(results[0]);
+      resolve(results);
     });
   });
 };

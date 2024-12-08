@@ -44,7 +44,7 @@ const lihatPenimbangan = () => {
     const query = "CALL LihatPenimbangan()";
     pool.query(query, (err, results) => {
       if (err) reject(err);
-      resolve(results);
+      resolve(results[0]);
     });
   });
 };
@@ -54,7 +54,7 @@ const getPenimbanganByID = (id) => {
     const query = "CALL LihatPenimbanganById(?)";
     pool.query(query, [id], (err, results) => {
       if (err) reject(err);
-      resolve(results[0]);
+      resolve(results);
     });
   });
 };

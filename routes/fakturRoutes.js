@@ -7,10 +7,12 @@ const {
   getFakturByID,
   getFakturByNoFaktur,
 } = require("../controllers/fakturController");
-const { authToken } = require("../middleware/authToken");
+const auth = require("../middleware/authToken");
 
-router.post("/buat", authToken(["operator"]), buatFaktur);
-router.put("/update-status", authToken(["operator"]), updateStatusFaktur);
-router.get("/lihat", authToken(), getFaktur);
-router.get("/lihat/:id", authToken(), getFakturByID);
-router.get("/lihat/no-faktur", authToken(), getFakturByNoFaktur);
+router.post("/buat", auth.authToken(["operator"]), buatFaktur);
+router.put("/update-status", auth.authToken(["operator"]), updateStatusFaktur);
+router.get("/lihat", auth.authToken(), getFaktur);
+router.get("/lihat/:id", auth.authToken(), getFakturByID);
+router.get("/lihat/no-faktur", auth.authToken(), getFakturByNoFaktur);
+
+module.exports = router;
