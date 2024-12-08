@@ -1,10 +1,15 @@
-const fakturModel = require("../models/fakturModel");
+const pool = require("../config/db");
 
 const buatFaktur = async (req, res) => {
   const { id_penimbangan } = req.body;
   try {
-    await fakturModel.buatFaktur(id_penimbangan);
-    res.status(201).json({ message: "Faktur berhasil dibuat!" });
+    const query = "CALL BuatFaktur(?)";
+    pool.query(query, [id_penimbangan], (err) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json({ message: "Faktur berhasil dibuat" });
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -13,8 +18,13 @@ const buatFaktur = async (req, res) => {
 const updateStatusFaktur = async (req, res) => {
   const { id, status } = req.body;
   try {
-    await fakturModel.updateStatusFaktur(id, status);
-    res.status(201).json({ message: "Status faktur berhasil diperbarui!" });
+    const query = "CALL UpdateStatusFaktur(?, ?)";
+    pool.query(query, [id, status], (err) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json({ message: "Status faktur berhasil diupdate" });
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -22,8 +32,13 @@ const updateStatusFaktur = async (req, res) => {
 
 const getFaktur = async (req, res) => {
   try {
-    const faktur = await fakturModel.getFaktur();
-    res.status(200).json(faktur);
+    const query = "CALL LihatFaktur()";
+    pool.query(query, (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -32,8 +47,13 @@ const getFaktur = async (req, res) => {
 const getFakturByID = async (req, res) => {
   const { id } = req.params;
   try {
-    const faktur = await fakturModel.getFakturByID(id);
-    res.status(200).json(faktur);
+    const query = "CALL CariFakturById(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -42,8 +62,13 @@ const getFakturByID = async (req, res) => {
 const getFakturByNoFaktur = async (req, res) => {
   const { no_faktur } = req.body;
   try {
-    const faktur = await fakturModel.getFakturByNoFaktur(no_faktur);
-    res.status(200).json(faktur);
+    const query = "CALL CariFakturByNomorFaktur(?)";
+    pool.query(query, [no_faktur], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

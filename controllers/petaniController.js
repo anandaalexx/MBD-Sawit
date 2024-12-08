@@ -1,12 +1,17 @@
-const petaniModel = require("../models/petaniModel");
+const pool = require("../config/db");
 
 const tambahPetani = async (req, res) => {
   const { nama, kontak } = req.body;
   try {
-    await petaniModel.tambahPetani(nama, kontak);
-    res.status(201).json({ message: "Petani berhasil ditambahkan" });
+    const query = "CALL TambahPetani(?, ?)";
+    pool.query(query, [nama, kontak], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: "Error: " + err.message });
+      }
+      res.status(201).json({ message: "Petani berhasil ditambahkan" });
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error: " + err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -14,8 +19,13 @@ const updatePetani = async (req, res) => {
   const { id } = req.params;
   const { nama, kontak } = req.body;
   try {
-    await petaniModel.updatePetani(id, nama, kontak);
-    res.status(201).json({ message: "Petani berhasil diupdate" });
+    const query = "CALL UpdatePetani(?, ?, ?)";
+    pool.query(query, [id, nama, kontak], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json({ message: "Petani berhasil diupdate" });
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -24,8 +34,13 @@ const updatePetani = async (req, res) => {
 const deletePetani = async (req, res) => {
   const { id } = req.params;
   try {
-    await petaniModel.deletePetani(id);
-    res.status(201).json({ message: "Petani berhasil dihapus" });
+    const query = "CALL DeletePetani(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json({ message: "Petani berhasil dihapus" });
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -33,17 +48,28 @@ const deletePetani = async (req, res) => {
 
 const lihatPetani = async (req, res) => {
   try {
-    const petani = await petaniModel.lihatPetani();
-    res.status(201).json(petani);
+    const query = "CALL LihatPetani()";
+    pool.query(query, (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-const getpetanibyid = async (req, res) => {
+const getPetaniByID = async (req, res) => {
+  const { id } = req.params;
   try {
-    const petani = await petaniModel.lihatPetaniByID();
-    res.status(201).json(petani);
+    const query = "CALL LihatPetanibyID(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results[0]);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -54,5 +80,5 @@ module.exports = {
   updatePetani,
   deletePetani,
   lihatPetani,
-  getpetanibyid,
+  getPetaniByID,
 };

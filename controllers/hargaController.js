@@ -1,10 +1,15 @@
-const hargaModel = require("../models/hargaModel");
+const pool = require("../config/db");
 
 const tambahHarga = async (req, res) => {
   const { harga_sekarang } = req.body;
   try {
-    await hargaModel.tambahHarga(harga_sekarang);
-    res.status(201).json({ message: "Harga berhasil ditambahkan!" });
+    const query = "CALL TambahHargaSawit(?)";
+    pool.query(query, [harga_sekarang], (err) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json({ message: "Harga berhasil ditambahkan!" });
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -12,8 +17,13 @@ const tambahHarga = async (req, res) => {
 
 const getHarga = async (req, res) => {
   try {
-    const harga = await hargaModel.getHarga();
-    res.status(200).json(harga);
+    const query = "CALL LihatHarga()";
+    pool.query(query, (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(200).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -21,8 +31,13 @@ const getHarga = async (req, res) => {
 
 const getHargaSekarang = async (req, res) => {
   try {
-    const harga = await hargaModel.getHargaSekarang();
-    res.status(200).json(harga);
+    const query = "CALL LihatHargaSekarang()";
+    pool.query(query, (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(200).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

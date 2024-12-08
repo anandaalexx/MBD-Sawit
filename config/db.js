@@ -17,7 +17,7 @@ pool.query("SELECT 1", (err, results) => {
   if (err) {
     console.error("Tidak dapat terhubung ke database:", err);
   } else {
-    console.log("Database Terhubung: Test query berhasil");
+    console.log("Database Terhubung");
   }
 });
 

@@ -1,19 +1,23 @@
-const penimbanganModel = require("../models/penimbanganModel");
+const pool = require("../config/db");
 
 const catatPenimbangan = async (req, res) => {
   const { id_kendaraan, berat_kotor, berat_kendaraan } = req.body;
   const id_op = req.user.id;
 
   try {
-    await penimbanganModel.catatPenimbangan(
-      id_op,
-      id_kendaraan,
-      berat_kotor,
-      berat_kendaraan
+    const query = "CALL CatatPenimbangan(?, ?, ?, ?)";
+    pool.query(
+      query,
+      [id_op, id_kendaraan, berat_kotor, berat_kendaraan],
+      (err) => {
+        if (err) {
+          return res.status(500).json({ message: err.message });
+        }
+        res.status(201).json({ message: "Penimbangan berhasil dicatat" });
+      }
     );
-    res.status(201).json({ message: "Penimbangan berhasil dicatat" });
   } catch (err) {
-    res.status(500).json({ message: err.message, id_op });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -22,14 +26,19 @@ const updatePenimbangan = async (req, res) => {
   const id_op = req.user.id;
   const { id_kendaraan, berat_kotor, berat_kendaraan } = req.body;
   try {
-    await penimbanganModel.updatePenimbangan(
-      id,
-      id_op,
-      id_kendaraan,
-      berat_kotor,
-      berat_kendaraan
+    const query = "CALL UpdatePenimbangan(?, ?, ?, ?, ?)";
+    pool.query(
+      query,
+      [id, id_op, id_kendaraan, berat_kotor, berat_kendaraan],
+      (err) => {
+        if (err) {
+          return res.status(500).json({ message: err.message });
+        }
+        res
+          .status(200)
+          .json({ message: "Catatan penimbangan berhasil diupdate" });
+      }
     );
-    res.status(200).json({ message: "Penimbangan berhasil diupdate" });
   } catch (err) {
     res.status(500).json({ message: "Error: " + err.message });
   }
@@ -37,8 +46,13 @@ const updatePenimbangan = async (req, res) => {
 
 const lihatPenimbangan = async (req, res) => {
   try {
-    const penimbangan = await penimbanganModel.lihatPenimbangan();
-    res.status(200).json(penimbangan);
+    const query = "CALL LihatPenimbangan()";
+    pool.query(query, (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: "Error: " + err.message });
   }
@@ -47,8 +61,13 @@ const lihatPenimbangan = async (req, res) => {
 const getPenimbanganByID = async (req, res) => {
   const { id } = req.params;
   try {
-    const penimbangan = await penimbanganModel.getPenimbanganByID(id);
-    res.status(200).json(penimbangan);
+    const query = "CALL LihatPenimbanganByID()";
+    pool.query(query, [id], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: "Error: " + err.message });
   }
@@ -57,8 +76,13 @@ const getPenimbanganByID = async (req, res) => {
 const getLaporan = async (req, res) => {
   const { start_date, end_date } = req.body;
   try {
-    const laporan = await penimbanganModel.getLaporan(start_date, end_date);
-    res.status(200).json(laporan);
+    const query = "CALL GetLaporanRingkasanPenimbangan(?, ?)";
+    pool.query(query, [start_date, end_date], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      res.status(201).json(results);
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
