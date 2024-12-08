@@ -5,6 +5,7 @@ const userRoutes = require("./routes/userRoutes");
 const petaniRoutes = require("./routes/petaniRoutes");
 const kendaraanRoutes = require("./routes/kendaraanRoutes");
 const penimbanganRoutes = require("./routes/penimbanganRoutes");
+const fakturRoutes = require("./routes/fakturRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -16,6 +17,7 @@ app.use("/users", userRoutes);
 app.use("/petani", petaniRoutes);
 app.use("/kendaraan", kendaraanRoutes);
 app.use("/penimbangan", penimbanganRoutes);
+app.use("/faktur", fakturRoutes);
 
 const port = 3000;
 app.listen(port, () => {
