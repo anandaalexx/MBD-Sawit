@@ -16,6 +16,12 @@ router.put(
   penimbanganController.updatePenimbangan
 );
 
-router.get("/", auth.authToken(), penimbanganController.lihatPenimbangan);
+router.get("/lihat", auth.authToken(), penimbanganController.lihatPenimbangan);
+
+router.get(
+  "/lihat/:id",
+  auth.authToken(),
+  penimbanganController.getPenimbanganByID
+);
 
 module.exports = router;

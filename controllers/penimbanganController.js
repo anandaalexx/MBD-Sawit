@@ -44,4 +44,19 @@ const lihatPenimbangan = async (req, res) => {
   }
 };
 
-module.exports = { catatPenimbangan, updatePenimbangan, lihatPenimbangan };
+const getPenimbanganByID = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const penimbangan = await penimbanganModel.getPenimbanganByID(id);
+    res.status(200).json(penimbangan);
+  } catch (err) {
+    res.status(500).json({ message: "Error: " + err.message });
+  }
+};
+
+module.exports = {
+  catatPenimbangan,
+  updatePenimbangan,
+  lihatPenimbangan,
+  getPenimbanganByID,
+};

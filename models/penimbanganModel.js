@@ -49,4 +49,19 @@ const lihatPenimbangan = () => {
   });
 };
 
-module.exports = { catatPenimbangan, updatePenimbangan, lihatPenimbangan };
+const getPenimbanganByID = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "CALL LihatPenimbanganById(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) reject(err);
+      resolve(results[0]);
+    });
+  });
+};
+
+module.exports = {
+  catatPenimbangan,
+  updatePenimbangan,
+  lihatPenimbangan,
+  getPenimbanganByID,
+};
