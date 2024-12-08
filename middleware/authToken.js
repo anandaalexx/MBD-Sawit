@@ -11,6 +11,7 @@ const authToken = (roles = []) => {
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      console.log("Decoded JWT:", decoded);
       if (err) {
         return res.status(401).json({ message: "Token tidak valid!" });
       }
@@ -19,7 +20,7 @@ const authToken = (roles = []) => {
         return res.status(403).json({ message: "Anda tidak memiliki akses" });
       }
 
-      req.user = decoded;
+      req.user = { id: decoded.id, role: decoded.role };
       next();
     });
   };

@@ -1,10 +1,10 @@
 const pool = require("../config/db");
 
 const catatPenimbangan = (
+  id_op,
   id_kendaraan,
   berat_kotor,
-  berat_kendaraan,
-  id_op
+  berat_kendaraan
 ) => {
   return new Promise((resolve, reject) => {
     const query = "CALL CatatPenimbangan(?, ?, ?, ?)";
@@ -49,4 +49,4 @@ const lihatPenimbangan = () => {
   });
 };
 
-module.exports = { catatPenimbangan, updatePenimbangan };
+module.exports = { catatPenimbangan, updatePenimbangan, lihatPenimbangan };
