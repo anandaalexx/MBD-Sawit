@@ -7,10 +7,10 @@ router.post("/register", userController.registerUser);
 router.post("/login", userController.loginUser);
 router.post("/logout", userController.logoutUser);
 router.delete("/hapus", authToken(["manajer"]), userController.hapusOperator);
-router.get("/", authToken(["manajer"]), userController.getUsers);
-router.get("/:id", authToken(["manajer"]), userController.getUsersByID);
+router.get("/lihat", authToken(["manajer"]), userController.getUsers);
+router.get("/lihat/:id", authToken(["manajer"]), userController.getUsersByID);
 router.get(
-  "/username",
+  "/lihat/username",
   authToken(["manajer"]),
   userController.getUsersByUsername
 );
