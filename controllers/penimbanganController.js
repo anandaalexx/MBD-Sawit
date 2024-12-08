@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-const catatPenimbangan = async (req, res) => {
+const catatPenimbangan = (req, res) => {
   const { id_kendaraan, berat_kotor, berat_kendaraan } = req.body;
   const id_op = req.user.id;
 
@@ -21,7 +21,7 @@ const catatPenimbangan = async (req, res) => {
   }
 };
 
-const updatePenimbangan = async (req, res) => {
+const updatePenimbangan = (req, res) => {
   const { id } = req.params;
   const id_op = req.user.id;
   const { id_kendaraan, berat_kotor, berat_kendaraan } = req.body;
@@ -44,7 +44,7 @@ const updatePenimbangan = async (req, res) => {
   }
 };
 
-const lihatPenimbangan = async (req, res) => {
+const lihatPenimbangan = (req, res) => {
   try {
     const query = "CALL LihatPenimbangan()";
     pool.query(query, (err, results) => {
@@ -58,7 +58,7 @@ const lihatPenimbangan = async (req, res) => {
   }
 };
 
-const getPenimbanganByID = async (req, res) => {
+const getPenimbanganByID = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL LihatPenimbanganByID()";
@@ -73,7 +73,7 @@ const getPenimbanganByID = async (req, res) => {
   }
 };
 
-const getLaporan = async (req, res) => {
+const getLaporan = (req, res) => {
   const { start_date, end_date } = req.body;
   try {
     const query = "CALL GetLaporanRingkasanPenimbangan(?, ?)";

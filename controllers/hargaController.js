@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-const tambahHarga = async (req, res) => {
+const tambahHarga = (req, res) => {
   const { harga_sekarang } = req.body;
   try {
     const query = "CALL TambahHargaSawit(?)";
@@ -15,7 +15,7 @@ const tambahHarga = async (req, res) => {
   }
 };
 
-const getHarga = async (req, res) => {
+const getHarga = (req, res) => {
   try {
     const query = "CALL LihatHarga()";
     pool.query(query, (err, results) => {
@@ -29,7 +29,7 @@ const getHarga = async (req, res) => {
   }
 };
 
-const getHargaSekarang = async (req, res) => {
+const getHargaSekarang = (req, res) => {
   try {
     const query = "CALL LihatHargaSekarang()";
     pool.query(query, (err, results) => {

@@ -2,7 +2,7 @@ const pool = require("../config/db");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const registerUser = async (req, res) => {
+const registerUser = (req, res) => {
   const { username, nama, password, role } = req.body;
   try {
     const query = "CALL RegisterUser(?, ?, ?, ?)";
@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
+const loginUser = (req, res) => {
   const { username, password } = req.body;
   try {
     const query = "CALL LoginUser(?, ?)";
@@ -45,7 +45,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-const updateUsers = async (req, res) => {
+const updateUsers = (req, res) => {
   const { id, username, nama } = req.body;
   try {
     const query = "CALL UpdateUsers(?, ?, ?)";
@@ -58,7 +58,7 @@ const updateUsers = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUser = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL DeleteUsers(?)";
@@ -71,7 +71,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res) => {
+const getUsers = (req, res) => {
   try {
     const query = "CALL LihatUsers()";
     pool.query(query, (err, results) => {
@@ -84,7 +84,7 @@ const getUsers = async (req, res) => {
   }
 };
 
-const getUsersByID = async (req, res) => {
+const getUsersByID = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL CariUsersByID(?)";
@@ -97,7 +97,7 @@ const getUsersByID = async (req, res) => {
   }
 };
 
-const getUsersByUsername = async (req, res) => {
+const getUsersByUsername = (req, res) => {
   const { username } = req.body;
   try {
     const query = "CALL CariUsersByUsername(?)";

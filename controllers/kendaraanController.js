@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-const tambahKendaraan = async (req, res) => {
+const tambahKendaraan = (req, res) => {
   const { id_petani, no_plat, tipe } = req.body;
   try {
     const query = "CALL TambahKendaraan(?, ?, ?)";
@@ -15,7 +15,7 @@ const tambahKendaraan = async (req, res) => {
   }
 };
 
-const updateKendaraan = async (req, res) => {
+const updateKendaraan = (req, res) => {
   const { id } = req.params;
   const { id_petani, no_plat, tipe } = req.body;
   try {
@@ -31,7 +31,7 @@ const updateKendaraan = async (req, res) => {
   }
 };
 
-const hapusKendaraan = async (req, res) => {
+const hapusKendaraan = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL HapusKendaraan(?)";
@@ -46,7 +46,7 @@ const hapusKendaraan = async (req, res) => {
   }
 };
 
-const lihatKendaraan = async (req, res) => {
+const lihatKendaraan = (req, res) => {
   try {
     const query = "CALL LihatKendaraan()";
     pool.query(query, (err, results) => {
@@ -60,7 +60,7 @@ const lihatKendaraan = async (req, res) => {
   }
 };
 
-const getKendaraanByID = async (req, res) => {
+const getKendaraanByID = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL CariKendaraanById(?)";
@@ -75,7 +75,7 @@ const getKendaraanByID = async (req, res) => {
   }
 };
 
-const getKendaraanByPlat = async (req, res) => {
+const getKendaraanByPlat = (req, res) => {
   const { no_plat } = req.body;
   try {
     const query = "CALL CariKendaraanByNoPlat(?)";

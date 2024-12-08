@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-const tambahPetani = async (req, res) => {
+const tambahPetani = (req, res) => {
   const { nama, kontak } = req.body;
   try {
     const query = "CALL TambahPetani(?, ?)";
@@ -15,7 +15,7 @@ const tambahPetani = async (req, res) => {
   }
 };
 
-const updatePetani = async (req, res) => {
+const updatePetani = (req, res) => {
   const { id } = req.params;
   const { nama, kontak } = req.body;
   try {
@@ -31,7 +31,7 @@ const updatePetani = async (req, res) => {
   }
 };
 
-const deletePetani = async (req, res) => {
+const deletePetani = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL DeletePetani(?)";
@@ -46,7 +46,7 @@ const deletePetani = async (req, res) => {
   }
 };
 
-const lihatPetani = async (req, res) => {
+const lihatPetani = (req, res) => {
   try {
     const query = "CALL LihatPetani()";
     pool.query(query, (err, results) => {
@@ -60,7 +60,7 @@ const lihatPetani = async (req, res) => {
   }
 };
 
-const getPetaniByID = async (req, res) => {
+const getPetaniByID = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL LihatPetanibyID(?)";

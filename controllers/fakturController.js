@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-const buatFaktur = async (req, res) => {
+const buatFaktur = (req, res) => {
   const { id_penimbangan } = req.body;
   try {
     const query = "CALL BuatFaktur(?)";
@@ -15,7 +15,7 @@ const buatFaktur = async (req, res) => {
   }
 };
 
-const updateStatusFaktur = async (req, res) => {
+const updateStatusFaktur = (req, res) => {
   const { id, status } = req.body;
   try {
     const query = "CALL UpdateStatusFaktur(?, ?)";
@@ -30,7 +30,7 @@ const updateStatusFaktur = async (req, res) => {
   }
 };
 
-const getFaktur = async (req, res) => {
+const getFaktur = (req, res) => {
   try {
     const query = "CALL LihatFaktur()";
     pool.query(query, (err, results) => {
@@ -44,7 +44,7 @@ const getFaktur = async (req, res) => {
   }
 };
 
-const getFakturByID = async (req, res) => {
+const getFakturByID = (req, res) => {
   const { id } = req.params;
   try {
     const query = "CALL CariFakturById(?)";
@@ -59,7 +59,7 @@ const getFakturByID = async (req, res) => {
   }
 };
 
-const getFakturByNoFaktur = async (req, res) => {
+const getFakturByNoFaktur = (req, res) => {
   const { no_faktur } = req.body;
   try {
     const query = "CALL CariFakturByNomorFaktur(?)";
