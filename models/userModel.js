@@ -54,10 +54,32 @@ const getUsers = () => {
   });
 };
 
+const getUsersByID = (id) => {
+  return new Promise((resolve, reject) => {
+    const query = "CALL CariUsersByID(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) reject(err);
+      resolve(results[0]);
+    });
+  });
+};
+
+const getUsersByUsername = (username) => {
+  return new Promise((resolve, reject) => {
+    const query = "CALL CariUsersByUsername(?)";
+    pool.query(query, [id], (err, results) => {
+      if (err) reject(err);
+      resolve(results[0]);
+    });
+  });
+};
+
 module.exports = {
   registerUser,
   loginUser,
   updateUser,
   hapusOperator,
   getUsers,
+  getUsersByID,
+  getUsersByUsername,
 };

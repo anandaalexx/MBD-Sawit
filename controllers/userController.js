@@ -65,6 +65,26 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUsersByID = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const users = await userModel.getUsersByID(id);
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+const getUsersByUsername = async (req, res) => {
+  const { username } = req.body;
+  try {
+    const users = await userModel.getUsersByUsername(username);
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 const logoutUser = (req, res) => {
   res.clearCookie("token");
   res.status(200).json({ message: "Berhasil Logout!" });
@@ -75,5 +95,8 @@ module.exports = {
   loginUser,
   logoutUser,
   updateUsers,
+  hapusOperator,
   getUsers,
+  getUsersByID,
+  getUsersByUsername,
 };
