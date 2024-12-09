@@ -68,7 +68,7 @@ const getKendaraanByID = (req, res) => {
       if (err) {
         return res.status(500).json({ message: err.message });
       }
-      res.status(201).json(results);
+      res.status(201).json(results[0]);
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -83,7 +83,7 @@ const getKendaraanByPlat = (req, res) => {
       if (err) {
         return res.status(500).json({ message: err.message });
       }
-      res.status(201).json(results);
+      res.status(201).json(results[0]);
     });
   } catch (err) {
     res.status(500).json({ message: err.message });

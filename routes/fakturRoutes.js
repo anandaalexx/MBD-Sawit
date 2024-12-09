@@ -13,6 +13,6 @@ router.post("/buat", auth.authToken(["operator"]), buatFaktur);
 router.put("/update-status", auth.authToken(["operator"]), updateStatusFaktur);
 router.get("/lihat", auth.authToken(), getFaktur);
 router.get("/lihat/:id", auth.authToken(), getFakturByID);
-router.get("/nofaktur/:no_faktur", auth.authToken(), getFakturByNoFaktur);
+router.get("/nofaktur", auth.authToken(), getFakturByNoFaktur);
 
 module.exports = router;
