@@ -10,11 +10,7 @@ const {
 const auth = require("../middleware/authToken");
 
 router.post("/buat", auth.authToken(["operator"]), buatFaktur);
-router.patch(
-  "/update-status",
-  auth.authToken(["operator"]),
-  updateStatusFaktur
-);
+router.put("/update-status", auth.authToken(["operator"]), updateStatusFaktur);
 router.get("/lihat", auth.authToken(), getFaktur);
 router.get("/lihat/:id", auth.authToken(), getFakturByID);
 router.get("/nofaktur/:no_faktur", auth.authToken(), getFakturByNoFaktur);

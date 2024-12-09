@@ -4,7 +4,7 @@ const petaniController = require("../controllers/petaniController");
 const { authToken } = require("../middleware/authToken");
 
 router.post("/tambah", authToken(["operator"]), petaniController.tambahPetani);
-router.patch(
+router.put(
   "/update/:id",
   authToken(["operator"]),
   petaniController.updatePetani
